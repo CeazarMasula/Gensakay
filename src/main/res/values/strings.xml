@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Jeepsakay</string>
+    <string name="enter_destination">Enter Destination</string>
+    <string name="todo">TODO</string>
+</resources>
