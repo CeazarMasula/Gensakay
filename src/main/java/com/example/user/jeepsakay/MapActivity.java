@@ -116,7 +116,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         Log.d(TAG, "init: " + mLocationPermissionsGranted);
 
-        if (!mLocationPermissionsGranted){
+        if (mLocationPermissionsGranted){
 
             if (!Places.isInitialized()) {
                 Places.initialize(getApplicationContext(), apiKey);
