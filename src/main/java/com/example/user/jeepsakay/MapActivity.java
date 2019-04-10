@@ -49,6 +49,8 @@ import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
+import static android.location.Location.distanceBetween;
+
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener{
@@ -89,7 +91,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //    private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(
 //            new LatLng(-40, -168), new LatLng(71, 136));
 
-
     //widgets
     private ImageView mGps;
 
@@ -105,7 +106,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mGps = findViewById(R.id.ic_gps);
 
-//        getLocationPermission();
+        getLocationPermission();
         initMap();
 
     }
@@ -148,6 +149,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         if (placeLatLng != null) {
                             moveCamera(placeLatLng, DEFAULT_ZOOM, placeName);
                             Toast.makeText(MapActivity.this, "Moving to " + placeName, Toast.LENGTH_SHORT).show();
+//                            distanceBetween();
                         }
                         else {
                             Toast.makeText(MapActivity.this, "Error: cant find Location", Toast.LENGTH_SHORT).show();
@@ -233,22 +235,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(MapActivity.this);
     }
 
-//    private void getLocationPermission(){
-//        Log.d(TAG, "getLocationPermission: getting location permissions");
-//        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION};
-//
-//        if(ContextCompat.checkSelfPermission(this.getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-//            if(ContextCompat.checkSelfPermission(this.getApplicationContext(), COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-//                mLocationPermissionsGranted = true;
-//                initMap();
-//            }else{
-//                ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
-//            }
-//        }else{
-//            ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
-//        }
-//    }
+    private void getLocationPermission(){
+        Log.d(TAG, "getLocationPermission: getting location permissions");
+        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION};
+
+        if(ContextCompat.checkSelfPermission(this.getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            if(ContextCompat.checkSelfPermission(this.getApplicationContext(), COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                mLocationPermissionsGranted = true;
+                initMap();
+            }else{
+                ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
+            }
+        }else{
+            ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
