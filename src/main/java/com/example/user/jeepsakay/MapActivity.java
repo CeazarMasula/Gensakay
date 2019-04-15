@@ -82,7 +82,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private static final String TAG = "MapActivity";
-    private static final String apiKey = "AIzaSyDEvUuyh9RfoxExcPiymxlAluq3s2suoas";
+    private static final String apiKey = "YOUR_API_KEY_HERE";
 
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
